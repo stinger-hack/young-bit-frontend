@@ -1,7 +1,16 @@
 import { FC } from 'react';
+import { useRoutes } from 'react-router-dom';
+
+import { AppLayout } from './components/AppLayout';
+import { Router as PathRouter } from './utils/Router';
+import { LoadingProvider } from './components';
 
 export const App: FC = () => {
-  return <div className="asd" />;
-};
+  const routes = useRoutes(PathRouter);
 
-export default App;
+  return (
+    <LoadingProvider>
+      <AppLayout>{routes}</AppLayout>
+    </LoadingProvider>
+  );
+};

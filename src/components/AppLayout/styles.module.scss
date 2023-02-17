@@ -1,0 +1,19 @@
+.AppLayout {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  min-width: 1024px;
+
+  &_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0px var(--space-l);
+    overflow-y: auto;
+
+    z-index: 1;
+  }
+}
