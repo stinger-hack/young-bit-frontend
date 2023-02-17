@@ -1,8 +1,4 @@
 export const paths = {
-  lessons: '/',
+  home: '/',
   login: '/login',
-  showcase: '/showcase',
-  createLesson: '/createLesson',
-  runningLesson: '/runningLesson',
-  viewModel: '/viewModel',
 };

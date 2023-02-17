@@ -22,12 +22,7 @@
     "incremental": true,
     "baseUrl": "src",
     "noImplicitThis": false,
-    "outDir": "./dist/",
-    "paths": {
-      "src/*": [
-        "./src/"
-      ]
-    },
+    "outDir": "./build/",
     "composite": true,
   },
   "include": [
@@ -35,8 +30,5 @@
     "**/*.tsx",
     "./declaration.d.ts",
     "./vite.config.ts"
-  ],
-  "parserOptions": {
-    "project": "./.eslintrc.json"
-  }
+  ]
 }
