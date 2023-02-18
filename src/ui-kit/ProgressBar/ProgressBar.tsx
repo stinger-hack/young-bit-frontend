@@ -10,7 +10,7 @@ type Props = {
   className?: string;
 };
 
-export const ProgressBar: FC<Props> = ({ progress, className }) => (
+export const ProgressBar: FC<Props> = ({ progress = 0, className }) => (
   <div className={clsx(styles.ProgressBar, className)}>
     <Text className={styles.ProgressBar_text}>{`${progress}%`}</Text>
     <progress max={100} value={progress} className={styles.ProgressBar_line} />

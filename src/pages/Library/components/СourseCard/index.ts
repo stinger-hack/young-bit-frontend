@@ -1,0 +1,1 @@
+export { СourseCard } from './СourseCard';

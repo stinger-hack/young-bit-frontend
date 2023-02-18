@@ -16,7 +16,7 @@ export const accordionItems: Omit<AccordionItemProps, 'isActive'>[] = [
   },
   {
     logoName: 'news',
-    href: paths.news,
+    href: paths.library,
   },
   {
     logoName: 'analytic',

@@ -1,0 +1,47 @@
+.СourseCard {
+  display: flex;
+  flex-direction: column;
+  height: 422px;
+  width: 344px;
+  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+
+  &_image {
+    height: 190px;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  &_title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.04em;
+    color: var(--pink);
+    text-overflow: ellipsis;
+  }
+
+  &_description {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+
+  &_controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+}
