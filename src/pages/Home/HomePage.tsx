@@ -55,7 +55,7 @@ export const HomePage: FC = () => {
   );
 
   useEffect(() => {
-    getNews('FORMAL');
+    getNews('INITIATIVE');
     getTasks('INDIVIDUAL');
     getGroupTasks('DEPARTAMENT');
     // eslint-disable-next-line react-hooks/exhaustive-deps
