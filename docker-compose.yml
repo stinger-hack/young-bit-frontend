@@ -7,8 +7,9 @@ services:
       - './:/app'
       - '/app/node_modules'
     ports:
-      - 3000:3000
+      - 80:80
     stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true
-    command: npm start
+    env_file:
+      - .env

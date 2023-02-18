@@ -1,7 +1,7 @@
-FROM node:14.9-slim
+FROM node:16-slim
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 80
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev", "--", "--host" ]
