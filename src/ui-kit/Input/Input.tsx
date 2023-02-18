@@ -7,7 +7,7 @@ export type InputType = 'text' | 'default' | 'search';
 
 export interface InputProps {
   value: string | undefined;
-  width: 's' | 'm' | 'xl';
+  width?: 's' | 'm' | 'xl';
   type?: InputType;
   rows?: number;
   onChange: (value: string) => void;
@@ -25,7 +25,7 @@ export const _Input: FC<InputProps> = ({
   autoWidth,
   placeholder,
   textSize = 'default',
-  width,
+  width = 's',
   className,
 }) => {
   const onInputChange = (

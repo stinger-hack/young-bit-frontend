@@ -26,3 +26,11 @@ body {
     text-decoration: none;
   }
 }
+
+.blur {
+  filter: blur(4px);
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

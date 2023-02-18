@@ -13,6 +13,7 @@ import { InputSearch } from 'ui-kit/InputSearch';
 import { TasksCard } from './components/TasksCard/TasksCard';
 import { TeamTasksCard } from './components/TeamTasksCard/TeamTasksCard';
 import { ImportantSection } from './components/ImportantSection/ImportantSection';
+import { AddInitiativeModal } from './components/AddInitiativeModal/AddInitiativeModal';
 
 import styles from './styles.module.scss';
 
@@ -20,6 +21,10 @@ export const HomePage: FC = () => {
   const [selectedTask, setSelectedTask] = useState(0);
   const [importantsCount, setImportantsCount] = useState(0);
   const [searchValue, setSearchValue] = useState('');
+  const [modalIsOpened, setModalIsOpened] = useState(false);
+
+  const onModalClose = useCallback(() => setModalIsOpened(false), []);
+  const onModalOpen = useCallback(() => setModalIsOpened(true), []);
 
   const {
     data: news,
@@ -62,7 +67,12 @@ export const HomePage: FC = () => {
   }, []);
 
   return (
-    <AppLayout header="Главная">
+    <AppLayout
+      header="Главная"
+      modalIsOpen={modalIsOpened}
+      modalContent={<AddInitiativeModal close={onModalClose} />}
+      onModalClose={onModalClose}
+    >
       <div className={styles.HomePage}>
         <div className={styles.HomePage_left}>
           {!isTasksLoading && tasks?.data.body.tasks ? (
@@ -94,7 +104,10 @@ export const HomePage: FC = () => {
           <div className={styles.HomePage_formalNews}>
             <div className={styles.HomePage_formalNewsHeader}>
               <Text>СОБЫТИЯ</Text>
-              <ButtonContainer className={styles.HomePage_formalNewsAdd}>
+              <ButtonContainer
+                className={styles.HomePage_formalNewsAdd}
+                onClick={onModalOpen}
+              >
                 <Icon iconName="plus" />
               </ButtonContainer>
             </div>
