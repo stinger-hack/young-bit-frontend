@@ -1,0 +1,38 @@
+.Input {
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    font-weight: inherit;
+    background: transparent;
+    padding: 0;
+
+    border: 1px solid var(--pink-light);
+    border-radius: 16px;
+    height: 32px;
+    color: var(--black-1);
+    padding-left: 14px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+
+    &-small {
+        font-size: 16px;
+    }
+
+    &-default {
+        font-size: 18px;
+    }
+
+    &-textarea {
+        height: auto;
+        padding: 16px 20px;
+        resize: none;
+    }
+
+    &::placeholder {
+        color: var(--black-4);
+    }
+}

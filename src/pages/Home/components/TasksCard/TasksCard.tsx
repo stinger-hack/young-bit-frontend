@@ -16,13 +16,12 @@ export const TasksCard: FC<Props> = ({
   nextDisabled,
   onNextClick,
   title,
+  img_link,
   description,
 }) => {
   return (
     <BoxContainer row>
-      <div className={styles.TasksCard_image}>
-        <img src="" alt={title} />
-      </div>
+      <img src={img_link} alt={title} className={styles.TasksCard_image} />
       <div className={styles.TasksCard_content}>
         <Text className={styles.TasksCard_text}>{description}</Text>
         <div className={styles.TasksCard_buttons}>

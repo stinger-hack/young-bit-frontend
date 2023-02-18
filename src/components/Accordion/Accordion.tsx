@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Icon from 'ui-kit/Icon';
 import { paths } from 'utils';
@@ -20,7 +20,7 @@ export const accordionItems: Omit<AccordionItemProps, 'isActive'>[] = [
   },
   {
     logoName: 'analytic',
-    href: paths.analytic,
+    href: paths.statistics,
   },
   {
     logoName: 'shop',
@@ -45,6 +45,14 @@ export const Accordion: FC = () => {
           />
         ))}
       </ul>
+      <Link
+        className={styles.Accordion_info}
+        to="https://t.me/rossy_help_bot"
+        target="_blank"
+        rel="noopener"
+      >
+        <Icon iconName="question_mark" />
+      </Link>
     </nav>
   );
 };

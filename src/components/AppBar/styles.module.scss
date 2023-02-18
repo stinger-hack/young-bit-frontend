@@ -9,9 +9,6 @@
   padding: 0 var(--space-xxxxxl);
 
   &_header {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
     text-transform: uppercase;
   }
 
@@ -37,6 +34,7 @@
   }
 
   &_notifications {
+    position: relative;
     display: flex;
     width: 42px;
     height: 42px;
@@ -45,6 +43,26 @@
 
     &:hover {
       background-color: var(--pink-light);
+    }
+
+    &::after {
+      content: '4';
+      position: absolute;
+      display: flex;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.04em;
+      color: white;
+      width: 22px;
+      height: 22px;
+      top: 0;
+      right: -7px;
+      background-color: var(--pink);
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
     }
   }
 

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AppLayout } from 'components/AppLayout';
 import Text from 'ui-kit/Text';
@@ -8,6 +8,7 @@ import { useGetNews } from 'services/news/news.service';
 import { NewsCard } from 'components/NewsCard/NewsCard';
 import { ButtonContainer } from 'ui-kit/ButtonContainer';
 import { useGetTasks } from 'services/tasks/tasks.service';
+import { InputSearch } from 'ui-kit/InputSearch';
 
 import { TasksCard } from './components/TasksCard/TasksCard';
 import { TeamTasksCard } from './components/TeamTasksCard/TeamTasksCard';
@@ -18,6 +19,7 @@ import styles from './styles.module.scss';
 export const HomePage: FC = () => {
   const [selectedTask, setSelectedTask] = useState(0);
   const [importantsCount, setImportantsCount] = useState(0);
+  const [searchValue, setSearchValue] = useState('');
 
   const {
     data: news,
@@ -43,6 +45,14 @@ export const HomePage: FC = () => {
       return prev + 1;
     });
   }, [tasks?.data?.body.tasks.length]);
+
+  const sortedNews = useMemo(
+    () =>
+      news?.data.body.filter((el) =>
+        el.main_text.toLowerCase().includes(searchValue.toLocaleLowerCase())
+      ),
+    [news?.data.body, searchValue]
+  );
 
   useEffect(() => {
     getNews('FORMAL');
@@ -89,12 +99,12 @@ export const HomePage: FC = () => {
               </ButtonContainer>
             </div>
             <div className={styles.HomePage_searchBar}>
-              <Icon iconName="reward" className={styles.HomePage_rewardIcon} />
+              <InputSearch value={searchValue} onChange={setSearchValue} />
             </div>
           </div>
           <div className={styles.HomePage_events}>
-            {!isNewsLoading
-              ? news?.data.body.map((el) => <NewsCard key={el.id} {...el} />)
+            {!isNewsLoading && sortedNews
+              ? sortedNews.map((el) => <NewsCard key={el.id} {...el} />)
               : null}
           </div>
         </div>
