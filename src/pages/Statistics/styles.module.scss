@@ -17,11 +17,36 @@
     }
   }
 
-  &_puzzleCount {
+  &_puzzle {
+    max-width: 1556px;
+    width: 100%;
+    align-self: center;
+  }
+
+  &_count {
     color: var(--black-2);
+  }
+
+  &_count2 {
+    display: flex;
+    gap: 4px;
+  }
+
+  &_rewards {
+    color: var(--pink);
   }
 
   &_dots {
     margin-right: 20px;
+  }
+
+  &_grid {
+    display: grid;
+    grid-gap: var(--space-xxl);
+    justify-content: start;
+    grid-template-columns: repeat(4, 365px);
+    justify-items: center;
+    margin-bottom: var(--space-xxl);
+    width: 100%;
   }
 }
