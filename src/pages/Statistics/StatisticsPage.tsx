@@ -35,7 +35,7 @@ export const StatisticsPage: FC = () => {
               61/64
             </Text>
           </div>
-          <Icon iconName="dots" className={styles.StatisticsPage_dots} />
+          <Icon iconName="dots" />
         </div>
         <img
           src={puzzle}

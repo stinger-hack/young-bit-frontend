@@ -26,11 +26,9 @@
   }
 
   &_grid {
-    display: grid;
-    grid-gap: var(--space-xxl);
-    justify-content: start;
-    grid-template-columns: repeat(4, 365px);
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
     margin-bottom: var(--space-xxl);
     width: 100%;
   }

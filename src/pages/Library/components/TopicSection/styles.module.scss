@@ -5,14 +5,22 @@
   margin-top: 32px;
 
   &_title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
     margin-left: 20px;
     margin-bottom: 20px;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 23px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+
+    &-text {
+      font-style: normal;
+      letter-spacing: 0.04em;
+
+      &--more {
+        letter-spacing: 0.04em;
+        color: var(--pink);
+        margin-right: var(--space-s);
+      }
+    }
   }
 
   &_content {
