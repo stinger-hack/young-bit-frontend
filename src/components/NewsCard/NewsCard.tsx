@@ -9,7 +9,7 @@ const _NewsCard: FC<NewsType> = ({ title, main_text, image_url }) => {
   return (
     <div className={styles.NewsCard}>
       <img src={image_url} alt={title} className={styles.NewsCard_img} />
-      <Text>{main_text}</Text>
+      <Text className={styles.NewsCard_text}>{main_text}</Text>
     </div>
   );
 };

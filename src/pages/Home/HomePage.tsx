@@ -10,13 +10,14 @@ import { ButtonContainer } from 'ui-kit/ButtonContainer';
 import { useGetTasks } from 'services/tasks/tasks.service';
 
 import { TasksCard } from './components/TasksCard/TasksCard';
-import { ImportantCard } from './components/ImportantCard/ImportantCard';
 import { TeamTasksCard } from './components/TeamTasksCard/TeamTasksCard';
+import { ImportantSection } from './components/ImportantSection/ImportantSection';
 
 import styles from './styles.module.scss';
 
 export const HomePage: FC = () => {
   const [selectedTask, setSelectedTask] = useState(0);
+  const [importantsCount, setImportantsCount] = useState(0);
 
   const {
     data: news,
@@ -27,6 +28,11 @@ export const HomePage: FC = () => {
     data: tasks,
     isLoading: isTasksLoading,
     mutate: getTasks,
+  } = useGetTasks();
+  const {
+    data: groupTasks,
+    isLoading: isGroupTasksLoading,
+    mutate: getGroupTasks,
   } = useGetTasks();
 
   const onNextTask = useCallback(() => {
@@ -41,6 +47,7 @@ export const HomePage: FC = () => {
   useEffect(() => {
     getNews('FORMAL');
     getTasks('INDIVIDUAL');
+    getGroupTasks('DEPARTAMENT');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -98,18 +105,11 @@ export const HomePage: FC = () => {
               className={styles['HomePage_sectionText-count']}
               weight="black"
             >
-              2
+              {importantsCount}
             </Text>
           </Text>
           <div className={styles.HomePage_section}>
-            <ImportantCard
-              text={`Изучение процессов работы компании. Задание: ознакомиться с процессом подачи заявок на гранты и условиями акселерационных программ.\nВся информация есть в Ководстве.`}
-              date="сегодня в 13:25"
-            />
-            <ImportantCard
-              text={`Изучение процессов работы компании. Задание: ознакомиться с процессом подачи заявок на гранты и условиями акселерационных программ.\nВся информация есть в Ководстве.`}
-              date="сегодня в 13:25"
-            />
+            <ImportantSection setImportantsCount={setImportantsCount} />
           </div>
           <Text className={styles.HomePage_sectionText}>
             Командные задания
@@ -117,18 +117,19 @@ export const HomePage: FC = () => {
               className={styles['HomePage_sectionText-count']}
               weight="black"
             >
-              2
+              {groupTasks?.data.body.tasks.length}
             </Text>
           </Text>
           <div className={styles.HomePage_section}>
-            <TeamTasksCard
-              progress={65}
-              text="Подготовить материалы для обучения клиентов самостоятельному решению проблем, такие как руководства и инструкции, которые можно будет размещать на сайте компании."
-            />
-            <TeamTasksCard
-              progress={97}
-              text="Подготовить материалы для обучения клиентов самостоятельному решению проблем, такие как руководства и инструкции, которые можно будет размещать на сайте компании."
-            />
+            {!isGroupTasksLoading
+              ? groupTasks?.data.body.tasks.map((el) => (
+                  <TeamTasksCard
+                    key={el.title}
+                    progress={el.progress}
+                    text={el.description}
+                  />
+                ))
+              : null}
           </div>
         </div>
       </div>
