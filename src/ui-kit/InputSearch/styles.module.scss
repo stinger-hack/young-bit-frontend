@@ -1,0 +1,17 @@
+.InputSearch {
+    display: flex;
+    position: relative;
+    width: 365px;
+
+    &-input {
+        width: 100%;
+    }
+
+    &-btn {
+        position: absolute;
+        right: 0;
+        top: 4px;
+        margin-right: 14px;
+        color: var(--black-2);
+    }
+}

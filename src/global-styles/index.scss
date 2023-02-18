@@ -5,6 +5,7 @@ body {
   color: var(--black-1);
   background-color: #fff;
   height: 100vh;
+  letter-spacing: 0.04em;
   overflow: hidden;
 
   ::-webkit-scrollbar {
@@ -24,4 +25,12 @@ body {
   a {
     text-decoration: none;
   }
+}
+
+.blur {
+  filter: blur(4px);
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }

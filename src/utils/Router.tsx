@@ -1,6 +1,8 @@
 import { RouteObject } from 'react-router-dom';
 
-import { HomePage, LibraryPage } from '../pages';
+import { NotFoundPage } from 'pages/NotFoundPage';
+
+import { HomePage, LibraryPage, ShopPage, StatisticsPage } from '../pages';
 import { paths } from './paths';
 
 export const Router: RouteObject[] = [
@@ -13,11 +15,15 @@ export const Router: RouteObject[] = [
     element: <LibraryPage />,
   },
   {
-    path: paths.analytic,
-    element: <HomePage />,
+    path: paths.statistics,
+    element: <StatisticsPage />,
   },
   {
     path: paths.shop,
-    element: <HomePage />,
+    element: <ShopPage />,
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ];

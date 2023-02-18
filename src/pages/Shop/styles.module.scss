@@ -1,0 +1,35 @@
+.ShopPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-xxl);
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    &-text {
+      display: flex;
+      gap: 12px;
+      text-transform: uppercase;
+    }
+  }
+
+  &_count {
+    color: var(--black-2);
+  }
+
+  &_dots {
+    margin-right: 20px;
+  }
+
+  &_grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: var(--space-xxl);
+    width: 100%;
+  }
+}

@@ -8,6 +8,9 @@ import { ReactComponent as shop } from './shop.svg';
 import { ReactComponent as reward } from './reward.svg';
 import { ReactComponent as plus } from './plus.svg';
 import { ReactComponent as intersect } from './intersect.svg';
+import { ReactComponent as question_mark } from './question_mark.svg';
+import { ReactComponent as search } from './search.svg';
+import { ReactComponent as dots } from './dots.svg';
 
 export {
   close,
@@ -20,4 +23,7 @@ export {
   reward,
   plus,
   intersect,
+  question_mark,
+  search,
+  dots,
 };

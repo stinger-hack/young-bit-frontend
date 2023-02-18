@@ -26,7 +26,7 @@ interface TextProps extends PropsWithChildren {
 
 export const Text: FC<TextProps> = ({
   size = 't1',
-  weight = 'regular',
+  weight = 'light',
   className,
   children,
   ellipsis,

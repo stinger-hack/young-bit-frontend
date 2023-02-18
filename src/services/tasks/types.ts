@@ -5,6 +5,7 @@ export interface TaskType {
   description: string;
   spent_time: number;
   cost: number;
+  img_link: string;
   progress: number;
   created_at: string;
   updated_at: string;
