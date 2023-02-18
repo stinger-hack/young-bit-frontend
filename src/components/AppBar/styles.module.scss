@@ -1,0 +1,59 @@
+.AppBar {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  width: 100%;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 0 var(--space-xxxxxl);
+
+  &_header {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-transform: uppercase;
+  }
+
+  &_content {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 30px;
+
+    &-withNotify {
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: var(--lime);
+      }
+    }
+  }
+
+  &_notifications {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--pink-light);
+
+    &:hover {
+      background-color: var(--pink-light);
+    }
+  }
+
+  &_avatar {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+}

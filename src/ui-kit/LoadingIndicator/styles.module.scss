@@ -16,7 +16,7 @@
     display: grid;
     border: 4.5px solid #0000;
     border-radius: 50%;
-    border-right-color: #5486cf;
+    border-right-color: var(--pink);
     animation: spin 0.8s infinite linear;
 
     &::before,

@@ -1,0 +1,36 @@
+.ButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: none;
+  outline: none;
+  user-select: none;
+
+  &--disabled {
+    cursor: default;
+  }
+
+  &:focus-visible::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    outline: 1px solid var(--focus-1);
+  }
+
+  &--no-outline:focus-visible::before {
+    content: none;
+  }
+
+  &_submitter {
+    display: none;
+  }
+}

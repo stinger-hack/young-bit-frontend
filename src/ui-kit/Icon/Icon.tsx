@@ -1,13 +1,15 @@
-import { FC } from "react";
-import clsx from "clsx";
-import { Colors } from "utils";
-import * as icons from "./assets";
+import { FC } from 'react';
+import clsx from 'clsx';
 
-import styles from "./styles.module.scss";
+import { Colors } from 'utils';
+
+import * as icons from './assets';
+
+import styles from './styles.module.scss';
 
 export type IconName = keyof typeof icons;
 
-export type IconSizes = "small" | "medium" | "big";
+export type IconSizes = 'small' | 'medium' | 'big';
 
 export interface IconProps {
   iconName: IconName;
@@ -19,11 +21,11 @@ export interface IconProps {
 
 const getIconSize = (size: IconSizes) => {
   switch (size) {
-    case "small":
+    case 'small':
       return 16;
-    case "medium":
+    case 'medium':
       return 24;
-    case "big":
+    case 'big':
       return 32;
     default:
       return 24;
@@ -32,15 +34,15 @@ const getIconSize = (size: IconSizes) => {
 
 export const Icon: FC<IconProps> = ({
   iconName,
-  color = "black-1",
-  stroke = "medium",
+  color = 'black-1',
+  stroke = 'medium',
   className,
-  iconSize = "medium",
+  iconSize = 'medium',
 }): JSX.Element | null => {
   const Glyph = icons[iconName];
   const size = getIconSize(iconSize);
   const strokeClass =
-    stroke === "small" ? styles["Icon-thin"] : styles["Icon-fat"];
+    stroke === 'small' ? styles['Icon-thin'] : styles['Icon-fat'];
 
   if (!Glyph) {
     // такой иконки не существует

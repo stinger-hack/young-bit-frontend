@@ -1,5 +1,23 @@
-import { ReactComponent as check } from './close.svg';
+import { ReactComponent as close } from './close.svg';
+import { ReactComponent as logo } from './logo.svg';
+import { ReactComponent as home } from './home.svg';
+import { ReactComponent as news } from './news.svg';
+import { ReactComponent as notifications } from './notifications.svg';
+import { ReactComponent as analytic } from './analytic.svg';
+import { ReactComponent as shop } from './shop.svg';
+import { ReactComponent as reward } from './reward.svg';
+import { ReactComponent as plus } from './plus.svg';
+import { ReactComponent as intersect } from './intersect.svg';
 
 export {
-  check
+  close,
+  logo,
+  home,
+  news,
+  analytic,
+  shop,
+  notifications,
+  reward,
+  plus,
+  intersect,
 };

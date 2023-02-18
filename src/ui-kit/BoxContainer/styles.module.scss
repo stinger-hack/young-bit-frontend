@@ -1,0 +1,11 @@
+.BoxContainer {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  padding: 20px;
+
+  &-row {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,39 @@
+.AccordionItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 88px;
+  background-color: var(--accordion);
+  position: relative;
+
+  &_button {
+    height: 58px;
+    width: 100%;
+  }
+
+  &_buttonWrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-left: 20px;
+  }
+
+  &_icon {
+    color: var(--white);
+    margin-left: 20px;
+    z-index: 2;
+
+    &-active {
+      color: var(--accordion);
+    }
+  }
+
+  &_intersect {
+    position: absolute;
+    height: 126px;
+    width: 100%;
+    right: -10px;
+  }
+}

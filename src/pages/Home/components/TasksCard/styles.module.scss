@@ -1,0 +1,26 @@
+.TasksCard {
+  &_text {
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  &_image {
+    height: 100%;
+    margin-right: 58px;
+  }
+
+  &_buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}

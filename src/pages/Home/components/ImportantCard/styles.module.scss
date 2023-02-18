@@ -1,0 +1,24 @@
+.ImportantCard {
+  &_text {
+    margin-bottom: 10px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  &_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &_date {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.04em;
+    color: #999999;
+  }
+}

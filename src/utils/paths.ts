@@ -1,4 +1,6 @@
 export const paths = {
   home: '/',
-  login: '/login',
+  library: '/library',
+  analytic: '/analytic',
+  shop: '/shop',
 };

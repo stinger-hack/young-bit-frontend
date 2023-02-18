@@ -1,0 +1,43 @@
+.Button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 41px;
+    border: 1px solid var(--pink-light);
+    color: var(--pink);
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    width: fit-content;
+    min-width: 96px;
+    border-radius: 22px;
+    background-color: white;
+    padding: 0 14px;
+
+    &-primary {
+        background-color: var(--pink);
+        border: 1px solid var(--pink);
+        color: white;
+
+        &:hover {
+            background-color: white;
+            border: 1px solid var(--pink);
+            color: var(--pink);
+        }
+    }
+
+    &:hover {
+        background-color: var(--pink);
+        border: 1px solid var(--pink);
+        color: white;
+    }
+
+
+    &-disabled {
+        cursor: not-allowed;
+        color: gray;
+        border: 1px solid var(--black-3);
+    }
+}
