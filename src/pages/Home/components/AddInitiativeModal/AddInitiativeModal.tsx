@@ -53,7 +53,7 @@ const _AddInitiativeModal: FC<Props> = ({ close }) => {
       is_anonymous: anonymityField === 'Анонимно',
     };
 
-    postInitiative(body).then(() => {
+    postInitiative(body).finally(() => {
       close();
     });
   }, [

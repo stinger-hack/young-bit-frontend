@@ -3,11 +3,15 @@
   flex-direction: column;
   height: 422px;
   width: 344px;
+  box-sizing: border-box;
+  overflow: hidden;
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
 
   &_image {
     height: 190px;
+    width: fit-content;
+    align-self: center;
   }
 
   &_content {
