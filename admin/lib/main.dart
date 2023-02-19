@@ -1,12 +1,12 @@
-import 'dart:convert';
-
+import 'package:admin/ui/pages/shop_page.dart';
+import 'package:admin/ui/pages/statistic_page.dart';
+import 'package:admin/ui/pages/task_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'firebase_options.dart';
-import 'library_page.dart';
-import 'main_page.dart';
+import 'ui/pages/library_page.dart';
+import 'ui/pages/main_page.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -23,6 +23,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(fontFamily: 'GT Eesti'),
+        localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('ru', 'RU'),
+          ],
       home: const MyHomePage(),
     );
   }
@@ -42,8 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (index) {
       case 0:
         return const MainPage();
+      case 1:
+        return const TaskPage();
+      case 2:
+        return const StatisticPage();
       case 3:
         return const LibraryPage();
+      case 4:
+        return const ShopPage();
       default:
         return const MainPage();
     }
@@ -55,20 +70,20 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         Container(
           height: MediaQuery.of(context).size.height,
-          width: 108,
+          width: 80,
           color: const Color(0xffC8AEEF),
           child: Stack(
             fit: StackFit.expand,
             children: [
               Positioned(
-                top: 40 + index * 100,
+                top: 50 + index * 95,
                 right: 0,
-                child: Image.asset("images/current_index.png")
+                child: Image.asset("assets/images/current_index.png")
               ),
               Column(
                   children: [
                     const SizedBox(height: 22),
-                    Image.asset("images/logo.png"),
+                    Image.asset("assets/images/logo.png"),
                     const SizedBox(height: 23),
                     GestureDetector(
                       onTap: () => setState(() => index = 0),
@@ -77,14 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: 60,
                         color: Colors.transparent,
                         child: Image.asset(
-                            "images/main.png",
+                            "assets/images/main.png",
                             color: index == 0
                                 ? const Color(0xffC8AEEF)
                                 : Colors.white
                         )
                       )
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 35),
                     GestureDetector(
                         onTap: () => setState(() => index = 1),
                         child: Container(
@@ -92,14 +107,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: 60,
                             color: Colors.transparent,
                             child: Image.asset(
-                                "images/sber.png",
+                                "assets/images/sber.png",
                                 color: index == 1
                                     ? const Color(0xffC8AEEF)
                                     : Colors.white
                             )
                         )
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 35),
                     GestureDetector(
                         onTap: () => setState(() => index = 2),
                         child: Container(
@@ -107,14 +122,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: 60,
                             color: Colors.transparent,
                             child: Image.asset(
-                                "images/graph.png",
+                                "assets/images/graph.png",
                                 color: index == 2
                                     ? const Color(0xffC8AEEF)
                                     : Colors.white
                             )
                         )
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 35),
                     GestureDetector(
                         onTap: () => setState(() => index = 3),
                         child: Container(
@@ -122,14 +137,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: 60,
                             color: Colors.transparent,
                             child: Image.asset(
-                                "images/books.png",
+                                "assets/images/books.png",
                                 color: index == 3
                                     ? const Color(0xffC8AEEF)
                                     : Colors.white
                             )
                         )
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 35),
                     GestureDetector(
                         onTap: () => setState(() => index = 4),
                         child: Container(
@@ -137,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: 60,
                             color: Colors.transparent,
                             child: Image.asset(
-                                "images/bag.png",
+                                "assets/images/bag.png",
                                 color: index == 4
                                     ? const Color(0xffC8AEEF)
                                     : Colors.white
@@ -270,7 +285,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     //     )
                     // ),
                     const Spacer(),
-                    Image.asset("images/question.png"),
+                    Image.asset("assets/images/question.png"),
                     const SizedBox(height: 32)
                   ]
               )

@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:html';
 
+import 'package:admin/ui/widgets/custom_app_bar.dart';
+import 'package:admin/ui/widgets/dialogs/create_initiative.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'custom_button.dart';
-import 'event_model.dart';
+import '../widgets/custom_button.dart';
+import '../../models/event_model.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -32,7 +34,7 @@ class _MainPageState extends State<MainPage> {
 
   void getData() async {
     setState(() => isLoading = true);
-    var response = await http.get(Uri.parse("http://stingerhack.space:8000/api/news?news_type=INITIATIVE")).catchError((e) => error = e.toString());
+    var response = await http.get(Uri.parse("http://stingerhack.space:8000/api/news?news_type=INITIATIVE"));
     if (response.statusCode == 200) {
       events = [];
       List body = jsonDecode(utf8.decode(response.bodyBytes))["body"];
@@ -40,7 +42,7 @@ class _MainPageState extends State<MainPage> {
         events.add(EventModel.fromJson(event));
       }
     }
-    response = await http.get(Uri.parse("http://stingerhack.space:8000/api/admin/news?news_type=INITIATIVE")).catchError((e) => error = e.toString());
+    response = await http.get(Uri.parse("http://stingerhack.space:8000/api/admin/news?news_type=INITIATIVE"));
     if (response.statusCode == 200) {
       initiatives = [];
       print(jsonDecode(utf8.decode(response.bodyBytes)));
@@ -49,6 +51,19 @@ class _MainPageState extends State<MainPage> {
         initiatives.add(EventModel.fromJson(event));
       }
     }
+    // response = await http.post(
+    //     Uri.parse("http://stingerhack.space:8000/api/admin/news"),
+    //     headers: {"Content-Type": "application/json"},
+    //   body: jsonEncode({
+    //     "title": "Изучение процессов работы компании. Задание: ознакомиться с процессом подачи заявок на гранты и условиями акселерационных программ. Вся информация есть в Ководстве.",
+    //     "main_text": "string",
+    //     "image_url": "https://storage.yandexcloud.net/onboarding/a611efc7a2f44c9cb8243b30a37b56ad.png",
+    //     "user_id": 0,
+    //     "news_type": "INITIATIVE"
+    //   })
+    // );
+    // print(response.statusCode);
+    // print(response.body);
     setState(() => isLoading = false);
   }
 
@@ -68,7 +83,7 @@ class _MainPageState extends State<MainPage> {
       date = "вчера в ";
     }
     else {
-      date = "${dateTime.year}.${dateTime.month}.${dateTime.day}";
+      date = "${dateTime.day}.${dateTime.month}.${dateTime.year} в ";
     }
     List<String> dayTime = value.split("T")[1].split(":");
     date += "${dayTime[0]}:${dayTime[1]}";
@@ -95,97 +110,9 @@ class _MainPageState extends State<MainPage> {
           )
               : ListView(
               children: [
-                Container(
-                  height: 72,
-                  padding: const EdgeInsets.only(
-                      left: 52,
-                      right: 15
-                  ),
-                  decoration: BoxDecoration(
-                      color: const Color(0xffFFFFFF),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 2),
-                            blurRadius: 6,
-                            color: const Color(0xff000000).withOpacity(0.08)
-                        )
-                      ]
-                  ),
-                  child: Row(
-                      children: [
-                        const Text(
-                            "ГЛАВНАЯ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 24,
-                                color: Color(0xff333333)
-                            )
-                        ),
-                        const Spacer(),
-                        SizedBox(
-                            height: 42,
-                            width: 49,
-                            child: Stack(
-                                children: [
-                                  Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Image.asset("images/notification.png")
-                                  ),
-                                  Align(
-                                      alignment: Alignment.topRight,
-                                      child: Container(
-                                          height: 22,
-                                          width: 22,
-                                          alignment: Alignment.center,
-                                          decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xff9462E0)
-                                          ),
-                                          child: const Text(
-                                              "4",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
-                                                  color: Color(0xffFFFFFF)
-                                              )
-                                          )
-                                      )
-                                  )
-                                ]
-                            )
-                        ),
-                        const SizedBox(width: 23),
-                        SizedBox(
-                            height: 42,
-                            width: 42,
-                            child: Stack(
-                                children: [
-                                  Container(
-                                      height: 42,
-                                      width: 42,
-                                      decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                              image: AssetImage("images/avatar.png")
-                                          )
-                                      )
-                                  ),
-                                  Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: Container(
-                                          height: 12,
-                                          width: 12,
-                                          decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xffDAEF14)
-                                          )
-                                      )
-                                  )
-                                ]
-                            )
-                        )
-                      ]
-                  ),
+                const CustomAppBar(
+                    title: "ГЛАВНАЯ",
+                    isSearch: false
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,21 +142,29 @@ class _MainPageState extends State<MainPage> {
                                                 )
                                             )
                                         ),
-                                        Container(
-                                            height: 32,
-                                            width: 32,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    color: const Color(0xffEDE6F8)
-                                                )
-                                            ),
-                                            child: const Icon(
-                                                Icons.add,
-                                                color: Color(0xff9462E0),
-                                                size: 24
-                                            )
+                                        GestureDetector(
+                                          onTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) => const CreateInitiative()
+                                            ).then((value) => getData());
+                                          },
+                                          child: Container(
+                                              height: 32,
+                                              width: 32,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                      color: const Color(0xffEDE6F8)
+                                                  )
+                                              ),
+                                              child: const Icon(
+                                                  Icons.add,
+                                                  color: Color(0xff9462E0),
+                                                  size: 24
+                                              )
+                                          )
                                         ),
                                         const Spacer(),
                                         Container(
@@ -284,21 +219,22 @@ class _MainPageState extends State<MainPage> {
                                           Column(
                                               children: [
                                                 Container(
-                                                    height: 250,
-                                                    width: 503,
+                                                    height: 170,
+                                                    width: (MediaQuery.of(context).size.width - 710) / 2,
                                                     decoration: BoxDecoration(
                                                         borderRadius: const BorderRadius.only(
                                                             topLeft: Radius.circular(20),
                                                             topRight: Radius.circular(20)
                                                         ),
                                                         image: DecorationImage(
-                                                            image: NetworkImage(event.image)
+                                                            image: NetworkImage(event.image),
+                                                          fit: BoxFit.cover
                                                         )
                                                     )
                                                 ),
                                                 Container(
-                                                    height: 170,
-                                                    width: 503,
+                                                    height: 120,
+                                                    width: (MediaQuery.of(context).size.width - 710) / 2,
                                                     padding: const EdgeInsets.all(20),
                                                     decoration: BoxDecoration(
                                                         color: const Color(0xffFFFFFF),
@@ -498,8 +434,7 @@ class _MainPageState extends State<MainPage> {
                               )
                           ]
                         )
-                      ),
-
+                      )
                     ]
                 )
               ]
