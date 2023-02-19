@@ -8,10 +8,17 @@ import { TopicSection } from './components/TopicSection';
 import styles from './styles.module.scss';
 
 export const LibraryPage: FC = () => {
-  const { data: library, isLoading, mutate: getLibrary } = useGetLibrary();
+  const {
+    data: library,
+    isLoading,
+    mutate: getLibrary,
+    isSuccess,
+  } = useGetLibrary();
 
   useEffect(() => {
-    getLibrary();
+    if (!isSuccess) {
+      getLibrary();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

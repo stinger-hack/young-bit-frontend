@@ -11,10 +11,13 @@ export interface InputProps {
   type?: InputType;
   rows?: number;
   onChange: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
   autoWidth?: boolean;
   placeholder?: string;
   textSize?: 'small' | 'default';
   className?: string;
+  disabled?: boolean;
 }
 
 export const _Input: FC<InputProps> = ({
@@ -22,6 +25,9 @@ export const _Input: FC<InputProps> = ({
   type,
   rows,
   onChange,
+  onFocus,
+  onBlur,
+  disabled = false,
   autoWidth,
   placeholder,
   textSize = 'default',
@@ -45,6 +51,7 @@ export const _Input: FC<InputProps> = ({
           { [styles[`Input-textarea`]]: !!rows },
         ])}
         rows={rows}
+        value={value}
         onChange={onInputChange}
         placeholder={placeholder}
       />
@@ -62,6 +69,9 @@ export const _Input: FC<InputProps> = ({
       ])}
       onChange={onInputChange}
       placeholder={placeholder}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      disabled={disabled}
       type={type}
     />
   );

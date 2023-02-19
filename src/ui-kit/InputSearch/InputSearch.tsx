@@ -11,9 +11,15 @@ interface Props {
   value: string | undefined;
   onChange: (value: string) => void;
   className?: string;
+  classNameSearch?: string;
 }
 
-export const InputSearch: FC<Props> = ({ value, onChange, className }) => {
+export const InputSearch: FC<Props> = ({
+  value,
+  onChange,
+  className,
+  classNameSearch,
+}) => {
   return (
     <div className={clsx([styles.InputSearch, className])}>
       <Input
@@ -23,7 +29,7 @@ export const InputSearch: FC<Props> = ({ value, onChange, className }) => {
         type="text"
         onChange={onChange}
         textSize="small"
-        className={clsx(styles[`InputSearch-input`])}
+        className={clsx(styles[`InputSearch-input`], classNameSearch)}
       />
       <ButtonContainer className={clsx(styles[`InputSearch-btn`])}>
         <Icon iconName="search" />

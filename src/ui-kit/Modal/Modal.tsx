@@ -1,27 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import clsx from 'clsx';
 import { FC, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { ButtonContainer } from 'ui-kit/ButtonContainer';
-
 import styles from './styles.module.scss';
-
-// const Content = styled.div<{ maxWidth: string }>`
-//   position: relative;
-//   background-color: white;
-//   border-radius: 16px;
-//   margin: 0 auto;
-//   display: flex;
-//   flex-direction: column;
-//   opacity: 0;
-//   transform: scale(0);
-//   transition: opacity, transform, 300ms ease;
-
-//   &.open {
-//     opacity: 1;
-//     transform: scale(1);
-//   }
-// `;
 
 type Props = {
   isVisible: boolean;
@@ -60,8 +43,8 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
   }
 
   return createPortal(
-    <ButtonContainer onClick={onOverlayClick} className={styles.Modal}>
-      <ButtonContainer
+    <div onClick={onOverlayClick} className={styles.Modal}>
+      <div
         className={clsx(styles.Modal_content, {
           [styles['Modal_content-active']]: isOpening,
         })}
@@ -70,8 +53,8 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
         }}
       >
         {children}
-      </ButtonContainer>
-    </ButtonContainer>,
+      </div>
+    </div>,
     portal
   );
 };

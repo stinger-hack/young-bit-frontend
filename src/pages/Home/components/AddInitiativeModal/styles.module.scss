@@ -1,8 +1,7 @@
 .AddInitiativeModal {
   cursor: default;
   width: 762px;
-  height: 314px;
-  background-color: white;
+  background-color: #F9F9F9;
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   padding: 20px;
@@ -30,5 +29,31 @@
   &_row {
     display: flex;
     gap: 12px;
+  }
+
+  &_controls {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  &_fileInput {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &_fileText {
+    color: var(--pink);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  &_submit {
+    height: 41px;
   }
 }

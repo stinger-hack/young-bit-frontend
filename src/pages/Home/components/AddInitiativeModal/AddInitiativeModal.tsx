@@ -1,9 +1,12 @@
-import { FC, memo, useState } from 'react';
+import { FC, memo, useCallback, useRef, useState } from 'react';
 
+import { usePostImage } from 'services/helpers.service';
+import { usePostInitiative } from 'services/news/news.service';
 import { Button } from 'ui-kit/Button';
 import { ButtonContainer } from 'ui-kit/ButtonContainer';
 import Icon from 'ui-kit/Icon';
 import { Input } from 'ui-kit/Input';
+import { Select } from 'ui-kit/Select/Select';
 import Text from 'ui-kit/Text';
 
 import styles from './styles.module.scss';
@@ -13,19 +16,55 @@ type Props = {
 };
 
 const _AddInitiativeModal: FC<Props> = ({ close }) => {
-  const [anonymityField, setAnonymityField] = useState('');
-  const [publicField, setPublicField] = useState('');
-  const [descriptionField, setDescriptionField] = useState('');
-  const [tagField, setTagField] = useState('');
+  const { mutateAsync: postInitiative } = usePostInitiative();
+  const [anonymityField, setAnonymityField] = useState<string | undefined>(
+    undefined
+  );
+  const [publicField, setPublicField] = useState<string | undefined>(undefined);
+  const [descriptionField, setDescriptionField] = useState<string | undefined>(
+    undefined
+  );
+  const [tagField, setTagField] = useState<string | undefined>(undefined);
+  const [pictureLinkField, setPictureLinkField] = useState('');
+  const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  // const onSubmit = useCallback(() => {
-  //   const body = {
-  //     anonymityField,
-  //     publicField,
-  //     descriptionField,
-  //     tagField,
-  //   };
-  // }, []);
+  const onFileLoad = () => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.value = '';
+      inputRef.current.files = null;
+    }
+  };
+
+  const { mutateAsync: postImage } = usePostImage();
+  const onFileChangeCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      postImage(e.target.files![0]).then((url) => {
+        setPictureLinkField(url.data.body.img_link);
+      });
+    }
+  };
+
+  const onSubmit = useCallback(() => {
+    const body = {
+      title: publicField,
+      main_text: descriptionField,
+      img_link: pictureLinkField,
+      tags: tagField,
+      is_anonymous: anonymityField === 'Анонимно',
+    };
+
+    postInitiative(body).then(() => {
+      close();
+    });
+  }, [
+    anonymityField,
+    close,
+    descriptionField,
+    pictureLinkField,
+    postInitiative,
+    publicField,
+    tagField,
+  ]);
 
   return (
     <div className={styles.AddInitiativeModal}>
@@ -43,17 +82,18 @@ const _AddInitiativeModal: FC<Props> = ({ close }) => {
         onSubmit={(e) => {
           e.stopPropagation();
           e.preventDefault();
-          console.log(e.target);
         }}
       >
         <div className={styles.AddInitiativeModal_row}>
-          <Input
+          <Select
+            options={['Анонимно', 'Не анонимно']}
             className={styles.AddInitiativeModal_input}
             value={anonymityField}
             onChange={setAnonymityField}
             placeholder="Анонимность"
           />
-          <Input
+          <Select
+            options={['Публично', 'Не публично']}
             className={styles.AddInitiativeModal_input}
             value={publicField}
             onChange={setPublicField}
@@ -75,7 +115,32 @@ const _AddInitiativeModal: FC<Props> = ({ close }) => {
         />
       </form>
       <div className={styles.AddInitiativeModal_controls}>
-        <Button isSubmit>создать</Button>
+        <div>
+          <input
+            className={styles.AddInitiativeModal_fileInput}
+            ref={inputRef}
+            type="file"
+            value=""
+            title=""
+            onChangeCapture={onFileChangeCapture}
+            onClick={onFileLoad}
+          />
+          <ButtonContainer
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              inputRef.current.click();
+            }}
+          >
+            <Text className={styles.AddInitiativeModal_fileText}>
+              Прикрепить файл
+            </Text>
+          </ButtonContainer>
+        </div>
+
+        <Button onClick={onSubmit} className={styles.AddInitiativeModal_submit}>
+          создать
+        </Button>
       </div>
     </div>
   );

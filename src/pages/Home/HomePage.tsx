@@ -75,12 +75,14 @@ export const HomePage: FC = () => {
     >
       <div className={styles.HomePage}>
         <div className={styles.HomePage_left}>
+          <div className={styles.HomePage_spacing} />
           {!isTasksLoading && tasks?.data.body.tasks ? (
             <>
               <div className={styles.HomePage_lessonsContainer}>
-                <Text className={styles.HomePage_lessonsHeader}>
+                <Text className={styles.HomePage_lessonsHeader} size="h2">
                   ЗАДАНИЯ{' '}
                   <Text
+                    size="h2"
                     className={styles.HomePage_allLessons}
                   >{`${tasks?.data.body.tasks_finished}/${tasks?.data.body.tasks_count}`}</Text>
                 </Text>
@@ -103,7 +105,7 @@ export const HomePage: FC = () => {
           ) : null}
           <div className={styles.HomePage_formalNews}>
             <div className={styles.HomePage_formalNewsHeader}>
-              <Text>СОБЫТИЯ</Text>
+              <Text size="h2">СОБЫТИЯ</Text>
               <ButtonContainer
                 className={styles.HomePage_formalNewsAdd}
                 onClick={onModalOpen}
@@ -122,9 +124,11 @@ export const HomePage: FC = () => {
           </div>
         </div>
         <div className={styles.HomePage_right}>
-          <Text className={styles.HomePage_sectionText}>
+          <div className={styles.HomePage_spacing} />
+          <Text className={styles.HomePage_sectionText} size="h2">
             ВАЖНОЕ
             <Text
+              size="h2"
               className={styles['HomePage_sectionText-count']}
               weight="black"
             >
@@ -134,11 +138,12 @@ export const HomePage: FC = () => {
           <div className={styles.HomePage_section}>
             <ImportantSection setImportantsCount={setImportantsCount} />
           </div>
-          <Text className={styles.HomePage_sectionText}>
-            Командные задания
+          <Text className={styles.HomePage_sectionText} size="h2">
+            КОМАНДНЫЕ ЗАДАНИЯ
             <Text
               className={styles['HomePage_sectionText-count']}
               weight="black"
+              size="h2"
             >
               {groupTasks?.data.body.tasks.length}
             </Text>

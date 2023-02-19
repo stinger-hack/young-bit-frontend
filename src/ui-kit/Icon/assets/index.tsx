@@ -11,6 +11,8 @@ import { ReactComponent as intersect } from './intersect.svg';
 import { ReactComponent as question_mark } from './question_mark.svg';
 import { ReactComponent as search } from './search.svg';
 import { ReactComponent as dots } from './dots.svg';
+import { ReactComponent as clip } from './clip.svg';
+import { ReactComponent as chart } from './chart.svg';
 
 export {
   close,
@@ -26,4 +28,6 @@ export {
   question_mark,
   search,
   dots,
+  clip,
+  chart,
 };
