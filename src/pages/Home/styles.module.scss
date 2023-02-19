@@ -4,10 +4,7 @@
 
   &_left {
     width: 100%;
-    max-width: 1024px;
-    min-width: 900px;
     overflow-y: auto;
-    margin-top: 39px;
   }
 
   &_lessonsContainer {
@@ -63,7 +60,7 @@
 
   &_events {
     display: grid;
-    grid-gap: var(--space-xxl);
+    grid-gap: 20px;
     justify-content: center;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -71,11 +68,14 @@
     width: 100%;
   }
 
+  &_spacing {
+    height: 32px;
+  }
+
   &_right {
-    width: auto;
+    width: 60%;
     margin-left: 32px;
     overflow-y: auto;
-    margin-top: 39px;
   }
 
   &_section {
@@ -88,7 +88,7 @@
 
   &_sectionText {
     display: flex;
-    margin-left: 24px;
+    margin-left: 20px;
     gap: 8px;
 
     &-count {

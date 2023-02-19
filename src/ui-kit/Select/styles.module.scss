@@ -1,0 +1,30 @@
+.Select {
+  position: relative;
+
+  &_itemsWrapper {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  &_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 5px 12px;
+    background-color: white;
+
+    &:hover {
+      background-color: var(--pink-light);
+    }
+  }
+}

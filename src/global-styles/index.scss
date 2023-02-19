@@ -5,16 +5,20 @@ body {
   color: var(--black-1);
   background-color: #fff;
   height: 100vh;
+  letter-spacing: 0.04em;
   overflow: hidden;
 
   ::-webkit-scrollbar {
-    width: 5px;
-    height: 8px;
+    visibility: hidden;
+    // width: 5px;
+    // height: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: rgb(223, 223, 223);
-    border-radius: 8px;
+    visibility: hidden;
+
+    // background-color: rgb(223, 223, 223);
+    // border-radius: 8px;
   }
 
   ::-webkit-scrollbar-track {
@@ -24,4 +28,12 @@ body {
   a {
     text-decoration: none;
   }
+}
+
+.blur {
+  filter: blur(4px);
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }

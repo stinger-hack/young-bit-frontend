@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AppLayout } from 'components/AppLayout';
 import Text from 'ui-kit/Text';
@@ -8,15 +8,23 @@ import { useGetNews } from 'services/news/news.service';
 import { NewsCard } from 'components/NewsCard/NewsCard';
 import { ButtonContainer } from 'ui-kit/ButtonContainer';
 import { useGetTasks } from 'services/tasks/tasks.service';
+import { InputSearch } from 'ui-kit/InputSearch';
 
 import { TasksCard } from './components/TasksCard/TasksCard';
-import { ImportantCard } from './components/ImportantCard/ImportantCard';
 import { TeamTasksCard } from './components/TeamTasksCard/TeamTasksCard';
+import { ImportantSection } from './components/ImportantSection/ImportantSection';
+import { AddInitiativeModal } from './components/AddInitiativeModal/AddInitiativeModal';
 
 import styles from './styles.module.scss';
 
 export const HomePage: FC = () => {
   const [selectedTask, setSelectedTask] = useState(0);
+  const [importantsCount, setImportantsCount] = useState(0);
+  const [searchValue, setSearchValue] = useState('');
+  const [modalIsOpened, setModalIsOpened] = useState(false);
+
+  const onModalClose = useCallback(() => setModalIsOpened(false), []);
+  const onModalOpen = useCallback(() => setModalIsOpened(true), []);
 
   const {
     data: news,
@@ -28,6 +36,11 @@ export const HomePage: FC = () => {
     isLoading: isTasksLoading,
     mutate: getTasks,
   } = useGetTasks();
+  const {
+    data: groupTasks,
+    isLoading: isGroupTasksLoading,
+    mutate: getGroupTasks,
+  } = useGetTasks();
 
   const onNextTask = useCallback(() => {
     setSelectedTask((prev) => {
@@ -38,22 +51,38 @@ export const HomePage: FC = () => {
     });
   }, [tasks?.data?.body.tasks.length]);
 
+  const sortedNews = useMemo(
+    () =>
+      news?.data.body.filter((el) =>
+        el.main_text.toLowerCase().includes(searchValue.toLocaleLowerCase())
+      ),
+    [news?.data.body, searchValue]
+  );
+
   useEffect(() => {
-    getNews('FORMAL');
+    getNews('INITIATIVE');
     getTasks('INDIVIDUAL');
+    getGroupTasks('DEPARTAMENT');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <AppLayout header="Главная">
+    <AppLayout
+      header="Главная"
+      modalIsOpen={modalIsOpened}
+      modalContent={<AddInitiativeModal close={onModalClose} />}
+      onModalClose={onModalClose}
+    >
       <div className={styles.HomePage}>
         <div className={styles.HomePage_left}>
+          <div className={styles.HomePage_spacing} />
           {!isTasksLoading && tasks?.data.body.tasks ? (
             <>
               <div className={styles.HomePage_lessonsContainer}>
-                <Text className={styles.HomePage_lessonsHeader}>
+                <Text className={styles.HomePage_lessonsHeader} size="h2">
                   ЗАДАНИЯ{' '}
                   <Text
+                    size="h2"
                     className={styles.HomePage_allLessons}
                   >{`${tasks?.data.body.tasks_finished}/${tasks?.data.body.tasks_count}`}</Text>
                 </Text>
@@ -76,59 +105,59 @@ export const HomePage: FC = () => {
           ) : null}
           <div className={styles.HomePage_formalNews}>
             <div className={styles.HomePage_formalNewsHeader}>
-              <Text>СОБЫТИЯ</Text>
-              <ButtonContainer className={styles.HomePage_formalNewsAdd}>
+              <Text size="h2">СОБЫТИЯ</Text>
+              <ButtonContainer
+                className={styles.HomePage_formalNewsAdd}
+                onClick={onModalOpen}
+              >
                 <Icon iconName="plus" />
               </ButtonContainer>
             </div>
             <div className={styles.HomePage_searchBar}>
-              <Icon iconName="reward" className={styles.HomePage_rewardIcon} />
+              <InputSearch value={searchValue} onChange={setSearchValue} />
             </div>
           </div>
           <div className={styles.HomePage_events}>
-            {!isNewsLoading
-              ? news?.data.body.map((el) => <NewsCard key={el.id} {...el} />)
+            {!isNewsLoading && sortedNews
+              ? sortedNews.map((el) => <NewsCard key={el.id} {...el} />)
               : null}
           </div>
         </div>
         <div className={styles.HomePage_right}>
-          <Text className={styles.HomePage_sectionText}>
+          <div className={styles.HomePage_spacing} />
+          <Text className={styles.HomePage_sectionText} size="h2">
             ВАЖНОЕ
             <Text
+              size="h2"
               className={styles['HomePage_sectionText-count']}
               weight="black"
             >
-              2
+              {importantsCount}
             </Text>
           </Text>
           <div className={styles.HomePage_section}>
-            <ImportantCard
-              text={`Изучение процессов работы компании. Задание: ознакомиться с процессом подачи заявок на гранты и условиями акселерационных программ.\nВся информация есть в Ководстве.`}
-              date="сегодня в 13:25"
-            />
-            <ImportantCard
-              text={`Изучение процессов работы компании. Задание: ознакомиться с процессом подачи заявок на гранты и условиями акселерационных программ.\nВся информация есть в Ководстве.`}
-              date="сегодня в 13:25"
-            />
+            <ImportantSection setImportantsCount={setImportantsCount} />
           </div>
-          <Text className={styles.HomePage_sectionText}>
-            Командные задания
+          <Text className={styles.HomePage_sectionText} size="h2">
+            КОМАНДНЫЕ ЗАДАНИЯ
             <Text
               className={styles['HomePage_sectionText-count']}
               weight="black"
+              size="h2"
             >
-              2
+              {groupTasks?.data.body.tasks.length}
             </Text>
           </Text>
           <div className={styles.HomePage_section}>
-            <TeamTasksCard
-              progress={65}
-              text="Подготовить материалы для обучения клиентов самостоятельному решению проблем, такие как руководства и инструкции, которые можно будет размещать на сайте компании."
-            />
-            <TeamTasksCard
-              progress={97}
-              text="Подготовить материалы для обучения клиентов самостоятельному решению проблем, такие как руководства и инструкции, которые можно будет размещать на сайте компании."
-            />
+            {!isGroupTasksLoading
+              ? groupTasks?.data.body.tasks.map((el) => (
+                  <TeamTasksCard
+                    key={el.title}
+                    progress={el.progress}
+                    text={el.description}
+                  />
+                ))
+              : null}
           </div>
         </div>
       </div>

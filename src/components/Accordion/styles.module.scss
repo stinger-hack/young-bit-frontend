@@ -1,8 +1,12 @@
 .Accordion {
   &_nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
     height: 100%;
-    width: 108px;
+    width: 80px;
     flex-shrink: 0;
     background: var(--accordion);
   }
@@ -22,5 +26,16 @@
       width: 50px;
       height: 26px;
     }
+  }
+
+  &_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--yellow);
+    margin-bottom: 32px;
   }
 }

@@ -16,7 +16,11 @@ export const AppBar: FC<Props> = ({ header, children }) => {
   return (
     <div className={styles.AppBar}>
       <div className={styles.AppBar_header}>
-        {header ? <Text>{header}</Text> : null}
+        {header ? (
+          <Text weight="bold" size="h1">
+            {header}
+          </Text>
+        ) : null}
       </div>
       <div
         className={clsx(styles.AppBar_content, {

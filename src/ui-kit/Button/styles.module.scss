@@ -15,24 +15,21 @@
     background-color: white;
     padding: 0 14px;
 
+    &:hover {
+        background-color: var(--pink-light);
+        border: 1px solid transparent;
+    }
+
     &-primary {
         background-color: var(--pink);
         border: 1px solid var(--pink);
         color: white;
 
         &:hover {
-            background-color: white;
+            background-color: #7447CB;
             border: 1px solid var(--pink);
-            color: var(--pink);
         }
     }
-
-    &:hover {
-        background-color: var(--pink);
-        border: 1px solid var(--pink);
-        color: white;
-    }
-
 
     &-disabled {
         cursor: not-allowed;

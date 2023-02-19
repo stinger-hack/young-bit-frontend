@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 import { FC, memo } from 'react';
 
-import { LibraryType } from 'services/library/types';
+import { LibrarySection } from 'services/library/types';
 import Text from 'ui-kit/Text';
 
 import { СourseCard } from '../СourseCard';
@@ -11,13 +11,20 @@ import styles from './styles.module.scss';
 
 type Props = {
   title: string;
-  cards: LibraryType[];
+  cards: LibrarySection[];
 };
 
 const _TopicSection: FC<Props> = ({ title, cards }) => {
   return (
     <div className={styles.TopicSection}>
-      <Text className={styles.TopicSection_title}>{title}</Text>
+      <div className={styles.TopicSection_title}>
+        <Text className={styles['TopicSection_title-text']} size="h2">
+          {title}
+        </Text>
+        <Text className={styles['TopicSection_title-text--more']} size="h2">
+          Ещё
+        </Text>
+      </div>
       <div className={styles.TopicSection_content}>
         {cards.map((el, i) => (
           <СourseCard key={i} {...el} />

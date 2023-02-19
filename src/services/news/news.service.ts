@@ -42,3 +42,34 @@ export const useGetNews = () => {
     },
   });
 };
+
+const postInitiative = async (body: any): Promise<ResponseType<NewsType>> => {
+  return axios.post('api/initiative', body);
+};
+
+export const usePostInitiative = () => {
+  const queryClient = useQueryClient();
+  const { show, hide } = useContext(LoadingProviderContext);
+
+  return useMutation(postInitiative, {
+    onMutate: () => {
+      show({ text: 'Выполняем обновление ...' });
+    },
+    onSuccess: (response) => {
+      const data = queryClient.getQueryData<ResponseType<NewsType[]>>([
+        queryKey,
+      ]);
+
+      if (data) {
+        const newData = data.data.body.concat(response.data.body);
+        queryClient.setQueryData([queryKey], newData);
+      }
+    },
+    onError: (e: HttpError) => {
+      console.error(e);
+    },
+    onSettled: () => {
+      hide();
+    },
+  });
+};
